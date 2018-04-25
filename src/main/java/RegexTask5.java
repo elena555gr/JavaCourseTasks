@@ -20,6 +20,7 @@ public class RegexTask5 {
        Matcher m = p.matcher(str);
        while (m.find()){
            System.out.println(m.group(0));
+
            }
        }
     }
