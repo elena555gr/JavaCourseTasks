@@ -21,6 +21,8 @@ public class CollectionsTask2 {
         set2.add(56);
         set2.add(0);
 
+
+
         CollectionsTask2 objUnion = new CollectionsTask2();
         System.out.println(objUnion.doUnion(set1,set2));
 
@@ -31,17 +33,16 @@ public class CollectionsTask2 {
 
 
    private HashSet<Integer> doUnion (HashSet<Integer> set1, HashSet<Integer> set2){
-       set1.addAll(set2);
-       return set1;
+       HashSet<Integer> newSet1 = new HashSet<>();
+       newSet1.addAll(set1);
+       newSet1.addAll(set2);
+       return newSet1;
     }
 
     private HashSet<Integer> doIntersect (HashSet<Integer> set1, HashSet<Integer> set2){
-        set1.retainAll(set2);
-        System.out.println(set1);
-        set2.retainAll(set1);
-        System.out.println(set2);
-
-        return set2;
+        HashSet<Integer> newSet1 = new HashSet<>(set1);
+        newSet1.retainAll(set2);
+        return newSet1;
     }
 
 }
