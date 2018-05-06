@@ -5,10 +5,10 @@ public class RegexTask2 {
     public static void main(String[] args) {
 
         String pattern = "\\w{3,15}";
-
+        Pattern p = Pattern.compile(pattern);
 
         for (int i = 0; i<args.length; i++){
-            Pattern p = Pattern.compile(pattern);
+
             Matcher m = p.matcher(args[i]);
 
             if (m.matches()){

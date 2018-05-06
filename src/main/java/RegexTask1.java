@@ -24,8 +24,8 @@ public class RegexTask1 {
                 String name = parts[1];
                 String patronimic = parts[2];
 
-                String initial1 = name.valueOf(0);
-                String initial2 = patronimic.valueOf(0);
+                char initial1 = name.charAt(0);
+                char initial2 = patronimic.charAt(0);
 
                 System.out.println(surname + " " + initial1 + " "+ initial2);
                 System.out.println(name);

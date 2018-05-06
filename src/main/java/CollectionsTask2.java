@@ -32,7 +32,9 @@ public class CollectionsTask2 {
     }
 
 
-   private HashSet<Integer> doUnion (HashSet<Integer> set1, HashSet<Integer> set2){
+    private HashSet<Integer> doUnion (HashSet<Integer> set1, HashSet<Integer> set2){
+
+
        HashSet<Integer> newSet1 = new HashSet<>();
        newSet1.addAll(set1);
        newSet1.addAll(set2);
