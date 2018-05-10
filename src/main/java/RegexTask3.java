@@ -9,7 +9,7 @@ public class RegexTask3 {
         try {
             br = new BufferedReader(new InputStreamReader(System.in));
             while (true) {
-                System.out.print("Enter a sentence of 5 words: ");
+                System.out.print("Enter a sentence:");
                 String input = br.readLine();
                 if ("q".equals(input)) {
                     System.out.println("Exit!");
@@ -40,9 +40,6 @@ public class RegexTask3 {
 
     private static String findTheLongestWord(String sentence){
         String[] words = splitTheSentenceIntoWords(sentence);
-        if (words.length != 5) {
-            System.out.println("Only 5 words expected");
-        }
         String longestWord = words[0];
         for (int i = 0; i < 5; i++) {
             if (longestWord.length() < words[i].length()) {
