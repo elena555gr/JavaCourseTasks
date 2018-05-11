@@ -41,7 +41,7 @@ public class RegexTask3 {
     private static String findTheLongestWord(String sentence){
         String[] words = splitTheSentenceIntoWords(sentence);
         String longestWord = words[0];
-        for (int i = 0; i < 5; i++) {
+        for (int i = 0; i < words.length; i++) {
             if (longestWord.length() < words[i].length()) {
                 longestWord = words[i];
             }
