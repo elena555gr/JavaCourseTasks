@@ -19,7 +19,7 @@ public class Student {
     }
 
 
-    private Student(String name, Integer course) {
+    public Student(String name, Integer course) {
         this.name = name;
         this.course = course;
     }
@@ -29,7 +29,7 @@ public class Student {
         return "name: " + name + " - course: " + course;
     }
 
-
+    @MyAnnotation
     public static void printStudents(List<Student> students, Integer course){
         Predicate<Student> filterByCourse = s -> s.getCourse().equals(course);
         students.stream()
