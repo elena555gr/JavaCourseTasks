@@ -1,0 +1,3 @@
+enum Breed {
+    DALMATIAN, BULLDOG, COLLIE, RETRIEVER, SPANIEL;
+}
