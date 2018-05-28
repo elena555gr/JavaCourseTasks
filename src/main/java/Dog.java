@@ -1,8 +1,16 @@
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Objects;
+import java.util.*;
 
-public class Dog {
+public class Dog implements Comparable<Dog>{
+
+    public int compareTo(Dog dog){
+        if(age==dog.age)
+            return 0;
+        else if(age>dog.age)
+            return 1;
+        else
+            return -1;
+    }
+
     private String name;
     private Breed breed;
     private double age;
@@ -51,6 +59,15 @@ public class Dog {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Dog dog = (Dog) o;
+        return Objects.equals(age, dog.age);
+    }
+
+
+
+    public boolean equalsByName(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Dog dog = (Dog) o;
         return Objects.equals(name, dog.name);
     }
 
@@ -60,18 +77,27 @@ public class Dog {
         return Objects.hash(name);
     }
 
-    public static boolean checkIfEquals(List<Dog> dogList){
+    public static boolean checkIfDogsWithSameNamesExist(List<Dog> dogList){
        boolean val = false;
            for (int i = 1; i < dogList.size(); i++) {
                System.out.println("next dog" + dogList.get(i));
                System.out.println("current dog" + dogList.get(i-1));
-               if (dogList.get(i).equals(dogList.get(i-1))) {
+               if (dogList.get(i).equalsByName(dogList.get(i-1))) {
                    val = true;
                    break;
                }
            }
            return val;
     }
+
+
+    public static Dog findOldestDog(List<Dog> dogList){
+           Collections.sort(dogList);
+           return dogList.get(dogList.size()-1);
+    }
+
+
+
 
 
     public static void main(String[] args) {
@@ -89,7 +115,9 @@ public class Dog {
         dogList.add(barky);
 
 
-        System.out.println(checkIfEquals(dogList));
+        System.out.println(checkIfDogsWithSameNamesExist(dogList));
+        System.out.println(findOldestDog(dogList));
+
 
     }
 }
