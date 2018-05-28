@@ -1,6 +1,6 @@
 import java.util.ArrayList;
-import java.util.HashSet;
 import java.util.List;
+import java.util.Objects;
 
 public class Dog {
     private String name;
@@ -46,27 +46,32 @@ public class Dog {
         this.breed = breed;
     }
 
-    public static boolean checkSameNames(List<Dog> dogList){
-        List<String> nameList = new ArrayList<>();
-        for(int i=0; i<dogList.size();i++){
-            String name = dogList.get(i).getName();
-            nameList.add(name);
-        }
-
-        HashSet<String> newSet = new HashSet<>();
-        for(String name:nameList){
-            newSet.add(name);
-        }
-
-        if(nameList.size() - newSet.size() != 0){
-            return true;
-        }
-        else{
-            return false;
-        }
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Dog dog = (Dog) o;
+        return Objects.equals(name, dog.name);
     }
 
+    @Override
+    public int hashCode() {
 
+        return Objects.hash(name);
+    }
+
+    public static boolean checkIfEquals(List<Dog> dogList){
+       boolean val = false;
+           for (int i = 1; i < dogList.size(); i++) {
+               System.out.println("next dog" + dogList.get(i));
+               System.out.println("current dog" + dogList.get(i-1));
+               if (dogList.get(i).equals(dogList.get(i-1))) {
+                   val = true;
+                   break;
+               }
+           }
+           return val;
+    }
 
 
     public static void main(String[] args) {
@@ -74,15 +79,17 @@ public class Dog {
         Dog rex = new Dog("Rex", 5, Breed.BULLDOG);
         Dog meggy = new Dog("Meggy", 2.0, Breed.SPANIEL);
         Dog meggy2 = new Dog("Meggy", 3.1, Breed.RETRIEVER);
+        Dog barky = new Dog ("Barky", 3.1, Breed.DALMATIAN);
 
         List<Dog> dogList = new ArrayList<>();
         dogList.add(sharik);
         dogList.add(rex);
         dogList.add(meggy);
         dogList.add(meggy2);
+        dogList.add(barky);
 
 
-        System.out.println(checkSameNames(dogList));
+        System.out.println(checkIfEquals(dogList));
 
     }
 }
