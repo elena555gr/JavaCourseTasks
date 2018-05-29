@@ -2,6 +2,7 @@ import java.util.*;
 
 public class Dog implements Comparable<Dog>{
 
+    @Override
     public int compareTo(Dog dog){
         if(age==dog.age)
             return 0;
@@ -78,46 +79,41 @@ public class Dog implements Comparable<Dog>{
     }
 
     public static boolean checkIfDogsWithSameNamesExist(List<Dog> dogList){
-       boolean val = false;
-           for (int i = 1; i < dogList.size(); i++) {
-               System.out.println("next dog" + dogList.get(i));
-               System.out.println("current dog" + dogList.get(i-1));
-               if (dogList.get(i).equalsByName(dogList.get(i-1))) {
-                   val = true;
-                   break;
-               }
-           }
-           return val;
+        boolean result = false;
+       HashSet<String> newDogNamesList = new HashSet<>();
+        for(int i=0;i<dogList.size();i++){
+            if (newDogNamesList.contains(dogList.get(i).getName())){
+                result = true;
+            }
+            else {
+                newDogNamesList.add(dogList.get(i).getName());
+            }
+        }
+        return result;
     }
 
 
-    public static Dog findOldestDog(List<Dog> dogList){
-           Collections.sort(dogList);
-           return dogList.get(dogList.size()-1);
+    public static Dog findOldestDog(List<Dog> dogList) {
+
+        Optional<Dog> max = dogList.stream().max(Comparator.naturalOrder());
+        Dog dog = max.get();
+        return dog;
     }
-
-
-
-
-
     public static void main(String[] args) {
         Dog sharik = new Dog("Sharik", 1.2, Breed.COLLIE);
         Dog rex = new Dog("Rex", 5, Breed.BULLDOG);
         Dog meggy = new Dog("Meggy", 2.0, Breed.SPANIEL);
-        Dog meggy2 = new Dog("Meggy", 3.1, Breed.RETRIEVER);
-        Dog barky = new Dog ("Barky", 3.1, Breed.DALMATIAN);
+        Dog barky = new Dog("Barky", 3.1, Breed.RETRIEVER);
+        Dog meggy2 = new Dog ("Meggy", 3.1, Breed.DALMATIAN);
 
         List<Dog> dogList = new ArrayList<>();
         dogList.add(sharik);
         dogList.add(rex);
         dogList.add(meggy);
-        dogList.add(meggy2);
         dogList.add(barky);
-
+        dogList.add(meggy2);
 
         System.out.println(checkIfDogsWithSameNamesExist(dogList));
         System.out.println(findOldestDog(dogList));
-
-
     }
 }
