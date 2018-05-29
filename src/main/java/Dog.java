@@ -2,6 +2,25 @@ import java.util.*;
 
 public class Dog implements Comparable<Dog>{
 
+    private String name;
+    private Breed breed;
+    private double age;
+
+    public Dog(String name, double age, Breed breed){
+        this.name = name;
+        this.age = age;
+        this.breed = breed;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public Breed getBreed() {
+        return breed;
+    }
+
+
     @Override
     public int compareTo(Dog dog){
         if(age==dog.age)
@@ -12,34 +31,6 @@ public class Dog implements Comparable<Dog>{
             return -1;
     }
 
-    private String name;
-    private Breed breed;
-    private double age;
-
-    public String getName() {
-        return name;
-    }
-
-    public Breed getBreed() {
-        return breed;
-    }
-
-    public double getAge() {
-        return age;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public void setBreed(Breed breed) {
-        this.breed = breed;
-    }
-
-    public void setAge(double age) {
-        this.age = age;
-    }
-
     @Override
     public String toString() {
         return "Dog{" +
@@ -47,29 +38,6 @@ public class Dog implements Comparable<Dog>{
                 ", breed='" + breed + '\'' +
                 ", age=" + age +
                 '}';
-    }
-
-    public Dog(String name, double age, Breed breed){
-        this.name = name;
-        this.age = age;
-        this.breed = breed;
-    }
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        Dog dog = (Dog) o;
-        return Objects.equals(age, dog.age);
-    }
-
-
-
-    public boolean equalsByName(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        Dog dog = (Dog) o;
-        return Objects.equals(name, dog.name);
     }
 
     @Override
@@ -97,12 +65,13 @@ public class Dog implements Comparable<Dog>{
 
         Optional<Dog> max = dogList.stream().max(Comparator.naturalOrder());
         Dog dog = max.get();
+
         return dog;
     }
     public static void main(String[] args) {
         Dog sharik = new Dog("Sharik", 1.2, Breed.COLLIE);
-        Dog rex = new Dog("Rex", 5, Breed.BULLDOG);
-        Dog meggy = new Dog("Meggy", 2.0, Breed.SPANIEL);
+        Dog rex = new Dog("Rex", 5.0, Breed.BULLDOG);
+        Dog meggy = new Dog("Meggy", 5.0, Breed.SPANIEL);
         Dog barky = new Dog("Barky", 3.1, Breed.RETRIEVER);
         Dog meggy2 = new Dog ("Meggy", 3.1, Breed.DALMATIAN);
 
@@ -114,6 +83,6 @@ public class Dog implements Comparable<Dog>{
         dogList.add(meggy2);
 
         System.out.println(checkIfDogsWithSameNamesExist(dogList));
-        System.out.println(findOldestDog(dogList));
+        System.out.println(findOldestDog(dogList).getName()+" - "+findOldestDog(dogList).getBreed()+" is the oldest dog");
     }
 }
